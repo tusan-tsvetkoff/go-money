@@ -245,6 +245,33 @@ To format and return Money as a float64 representing the amount value in the cur
 money.New(123456789, money.EUR).AsMajorUnits() // 1234567.89
 ```
 
+String parsing
+-
+
+Parsing a string into an `Amount` is possible using the `parser` package.
+
+```go
+p := parser.NewAmountParser()
+r, err := p.Parse("1,234.56", money.USD) // 123456
+// or
+r, err := p.Parse("1,234.56", "840") // 123456
+```
+
+You can configure 3 rules for the parser:
+* `AllowCurrencySymbol`: allows the input string to contain a currency symbol such as `"$"`
+* `StrictGrouping`: makes strings such as `"1,234 567.00"` invalid. Separators must be consistent.
+* `AcceptSigns`: allows the input strings to contain minus and plus signs. *differentiates between a minus and a hyphen*
+
+The default values are:
+
+```go
+ParserOptions{
+		AllowCurrencySymbol: false,
+		StrictGrouping:      false,
+		AcceptSigns:         true,
+	}
+```
+
 Contributing
 -
 Thank you for considering contributing!

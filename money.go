@@ -72,6 +72,8 @@ func defaultMarshalJSON(m Money) ([]byte, error) {
 // Amount is a data structure that stores the amount being used for calculations.
 type Amount = int64
 
+var AmountZero Amount = 0
+
 // Money represents monetary value information, stores
 // currency and amount value.
 type Money struct {
